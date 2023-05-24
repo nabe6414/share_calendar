@@ -1,2 +1,52 @@
-<h1>Public::Users#show</h1>
-<p>Find me in app/views/public/users/show.html.erb</p>
+<div class="container">
+  <h2 class="my-4"><span class="bg-light">マイページ</span></h2>
+
+  <div class="row">
+    <div class="col-12 my-2">
+      <strong>登録情報</strong></td>
+      <%= link_to "編集する", edit_user_path(@user.id), class: "btn btn-success ml-4" %>
+    </div>
+
+    <div class="col-12">
+      <table>
+        <thead>
+          <tr>
+            <th class="col-4"></th>
+            <th class="col-8"></th>
+          </tr>
+        </thead>
+        <tbody class="table">
+          <tr>
+            <td class="bg-light">ID</td>
+            <td><%= @user.id %></td>
+          </tr>
+          <tr>
+            <td class="bg-light">氏名</td>
+            <td><%= @user.name %></td>
+          </tr>
+          <tr>
+            <td class="bg-light">メールアドレス</td>
+            <td><%= @user.email %></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3 class="my-4 col-12"><span class="bg-light">参加グループ</span></h3>
+
+    <h3 class="my-4 col-12"><span class="bg-light">グループ新規作成</span></h3>
+    <div class="col-12">
+      <%= form_with model: @group, url: groups_path(@group.id), method: :post do |f| %>
+        <div class="field">
+          <%= f.label :name %><br>
+          <%= f.text_field :name %>
+        </div>
+        <div class="field">
+          <%= f.label :introduction %><br>
+          <%= f.text_area :introduction %>
+        </div>
+        <%= f.submit "新規作成", class: "btn btn-success" %>
+      <% end %>
+    </div>
+  </div>
+</div>

@@ -11,6 +11,46 @@
   </head>
 
   <body>
+    <header class="bg-dark">
+      <nav class="navbar navbar-expand-lg navbar-dark position-relative">
+        <div class="container">
+          <a class="navbar-brand" href="/"><span>ShareCalendar</span></a>
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#menu" aria-controls="menu" aria-expanded="false" aria-label="Toggle-navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="menu">
+            <ul class="navbar-nav ml-auto">
+              </li>
+              <% if user_signed_in? %>
+              <li class="nav-item">
+                <%= link_to user_path(current_user.id), class: 'nav-link text-white' do %>
+                  <i class="fas fa-home"></i> MyPage
+                <% end %>
+              <li class="nav-item">
+                Groups
+              </li>
+              <li class="nav-item">
+                <%= link_to destroy_user_session_path, method: :delete, class: 'nav-link text-white' do %>
+                  <i class="fas fa-sign-out-alt"></i> Log out
+                <% end %>
+              </li>
+              <% else %>
+              <li class="nav-item">
+                <%= link_to new_user_registration_path, class: 'nav-link text-white' do %>
+                  <i class="fas fa-user-plus"></i> Sign up
+                <% end %>
+              </li>
+              <li class="nav-item">
+                <%= link_to new_user_session_path, class: 'nav-link text-white' do %>
+                  <i class="fas fa-sign-in-alt"></i> Log in
+                <% end %>
+              </li>
+              <% end %>
+            </ul>
+          </div>
+        </div>
+      </nav>
+    </header>
     <%= yield %>
   </body>
 </html>
