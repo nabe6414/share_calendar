@@ -12,9 +12,12 @@ class Public::GroupsController < ApplicationController
   end
 
   def show
+    @group = Group.find(params[:id])
+    @users = @group.users.all
   end
 
   def edit
+    @group = Group.find(params[:id])
   end
 
   private

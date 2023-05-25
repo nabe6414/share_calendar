@@ -1,6 +1,8 @@
 class Public::UsersController < ApplicationController
   def show
     @user = current_user
+    @invitations = current_user.invitations.all
+    @groups = current_user.belong_groups.all
     @group = Group.new
   end
 

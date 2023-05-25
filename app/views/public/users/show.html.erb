@@ -32,7 +32,19 @@
       </table>
     </div>
 
+    <h3 class="my-4 col-12"><span class="bg-light">招待されているグループ</span></h3>
+    <div class="col-12">
+      <% @invitations.each do |invitation| %>
+        <%= invitation.group.name %>
+      <% end %>
+    </div>
+
     <h3 class="my-4 col-12"><span class="bg-light">参加グループ</span></h3>
+    <div class="col-12">
+      <% @groups.each do |group| %>
+        <%= group.name %>
+      <% end %>
+    </div>
 
     <h3 class="my-4 col-12"><span class="bg-light">グループ新規作成</span></h3>
     <div class="col-12">
