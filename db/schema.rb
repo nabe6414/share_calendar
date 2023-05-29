@@ -36,7 +36,7 @@ ActiveRecord::Schema.define(version: 2023_05_23_122739) do
     t.integer "owner_id", null: false
     t.integer "user_id", null: false
     t.integer "group_id", null: false
-    t.boolean "approved", null: false
+    t.boolean "approved", default: false, null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end

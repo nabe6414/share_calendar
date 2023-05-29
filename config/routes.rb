@@ -10,8 +10,9 @@ Rails.application.routes.draw do
   scope module: :public do
     root to: 'homes#top'
     resources :users
-    resources :groups
-    resources :invitations
+    resources :groups do
+      resources :invitations
+    end
   end
   namespace :admin do
     get '/' => 'homes#top'
