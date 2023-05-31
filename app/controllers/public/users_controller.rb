@@ -1,7 +1,7 @@
 class Public::UsersController < ApplicationController
   def show
     @user = current_user
-    @invitations = current_user.invitations.all
+    @invitations = Invitation.where(user_id: current_user.id).all
     @groups = current_user.belong_groups.all
     @group = Group.new
     @my_group = Group.where(owner_id: current_user.id)

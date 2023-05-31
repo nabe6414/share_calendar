@@ -2,7 +2,7 @@
   <h2>グループへ招待</h2>
 
   <div class="row">
-    <%= form_with model: @invitation, url: invitations_path(invitation.id), method: :post do |f| %>
+    <%= form_with model: @invitation, url: group_invitations_path(@group.id), method: :post do |f| %>
       <label>ID</label>
       <%= f.number_field :user_id %>
       <%= f.hidden_field :owner_id, :value => current_user.id %>

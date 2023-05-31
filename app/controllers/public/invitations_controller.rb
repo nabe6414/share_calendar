@@ -1,21 +1,23 @@
 class Public::InvitationsController < ApplicationController
   def new
-    @invitation = Invitation.new
     @group = Group.find(params[:group_id])
+    @invitation = @group.invitations.new
   end
 
   def create
-    @invitation = Invitation.new(invitation_params)
+    @group = Group.find(params[:group_id])
+    @invitation = @group.invitations.new(invitation_params)
     @invitation.save
   end
 
   def edit
-    @invitation = Invitation.find(params[:id])
     @group = Group.find(params[:group_id])
+    @invitation = @group.invitations.find(params[:id])
   end
-  
+
   def update
-    @invitation = Invitation.find(params[:id])
+    group = Group.find(params[:group_id])
+    @invitation = @group.invitations.find(params[:id])
     if @invitation.update(invitation_params)
       redirect_to user_path(current_user.id)
     else

@@ -1,11 +1,9 @@
 <div class="container">
   <h2><%= @group.name%>へ招待されました</h2>
-  <%= form_with model: @invitation, url: invitations_path(invitation.id), method: :patch do |f| %>
-    <%= f.radio_button :approved, true %>
-    <%= f.label :approved, "参加する" %>
-    <%= f.radio_button :approved, false %>
-    <%= f.label :approved, "保留" %>
-    <%= f.submit "決定", class: "btn btn-success" %>
-    <%= link_to "拒否する" group_invitation_path(@invitation.id), method: :delete, "data-confirm" => "本当に拒否しますか？", class: "btn btn-danger" %>
+  <%= form_with model: [@group, @invitation], url: edit_group_invitation_path(@invitation.group_id, @invitation.id), method: :patch do |f| %>
+    <% f.hidden_field :approved, :value => true %>
+    <%= f.submit "参加", class: "btn btn-success" %>
   <% end %>
+  <%= link_to "拒否", group_invitation_path(@invitation.group_id, @invitation.id), method: :delete, "data-confirm" => "グループへの参加を断りますか？", class: "btn btn-danger" %>
+
 </div>

@@ -37,7 +37,7 @@
     <h3 class="my-4 col-12"><span class="bg-light">招待されているグループ</span></h3>
     <div class="col-12">
       <% @invitations.each do |invitation| %>
-        <%= invitation.group.name %>
+        <%= link_to edit_group_invitation_path(invitation.group_id, invitation.id) do %><%= invitation.group.name %><% end %>
       <% end %>
     </div>
     <% end %>

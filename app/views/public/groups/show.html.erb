@@ -1,11 +1,14 @@
 <div class="container">
   <h2 class="my-4"><span class="bg-light"><%= @group.name %></span></h2>
   <p><%= @group.introduction %></p>
-  
+
   <h3 class="my-4"><span class="bg-light">メンバー一覧</span></h>
   <div class="col-12">
     <% @users.each do |user| %>
       <%= user.name %>
     <% end %>
   </div>
+  <% if @group.owner_id == current_user.id %>
+  <h3 class="my-4"><span class="bg-light"><%= link_to new_group_invitation_path(@group.id) do %>グループに招待する<% end %></span></h>
+  <% end %>
 </div>
