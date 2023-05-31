@@ -3,9 +3,11 @@ class Public::GroupsController < ApplicationController
     @group = Group.new(group_params)
     @group.owner_id = current_user.id
     if @group.save
-      redirect_to group_path(@book.id)
+      redirect_to group_path(@group.id)
     else
       @user = current_user
+      @invitations = current_user.invitations.all
+      @groups = current_user.belong_groups.all
       @group = Group.new
       render 'public/users/show'
     end
@@ -23,6 +25,6 @@ class Public::GroupsController < ApplicationController
   private
 
   def group_params
-    params.require(:group).permit(:name, :introduction)
+    params.require(:group).permit(:name, :introduction, :owner_id)
   end
 end

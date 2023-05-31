@@ -4,6 +4,7 @@ class Public::UsersController < ApplicationController
     @invitations = current_user.invitations.all
     @groups = current_user.belong_groups.all
     @group = Group.new
+    @my_group = Group.where(owner_id: current_user.id)
   end
 
   def edit

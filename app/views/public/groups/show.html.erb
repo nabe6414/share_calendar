@@ -4,6 +4,8 @@
   
   <h3 class="my-4"><span class="bg-light">メンバー一覧</span></h>
   <div class="col-12">
-    <%= @users %>
+    <% @users.each do |user| %>
+      <%= user.name %>
+    <% end %>
   </div>
 </div>
