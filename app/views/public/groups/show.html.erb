@@ -2,8 +2,9 @@
   <h2 class="my-4"><span class="bg-light"><%= @group.name %></span></h2>
   <p><%= @group.introduction %></p>
 
-  <h3 class="my-4"><span class="bg-light">メンバー一覧</span></h>
+  <h3 class="my-4"><span class="bg-light">メンバー一覧（<%= @users.count + 1 %>人）</span></h>
   <div class="col-12">
+    <%= @group_owner.name%><br>
     <% @users.each do |user| %>
       <%= user.name %>
     <% end %>

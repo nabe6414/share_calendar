@@ -16,15 +16,20 @@ class Public::GroupsController < ApplicationController
   def show
     @group = Group.find(params[:id])
     @users = @group.users.all
+    @group_owner = User.find_by(id: @group.owner_id)
   end
 
   def edit
     @group = Group.find(params[:id])
   end
 
+  def update
+    @group = Group.find(params[:id])
+  end
+
   private
 
   def group_params
-    params.require(:group).permit(:name, :introduction, :owner_id)
+    params.require(:group).permit(:name, :introduction, :owner_id, invitations_attributes: [:owner_id, :user_id, :group_id, :approved] )
   end
 end
