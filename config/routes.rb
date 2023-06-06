@@ -12,6 +12,7 @@ Rails.application.routes.draw do
     resources :users
     resources :groups do
       resources :invitations
+      delete 'delete_member'
     end
   end
   namespace :admin do

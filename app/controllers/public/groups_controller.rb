@@ -17,6 +17,7 @@ class Public::GroupsController < ApplicationController
     @group = Group.find(params[:id])
     @users = @group.users.all
     @group_owner = User.find_by(id: @group.owner_id)
+    @invitations = @group.invitations.all
   end
 
   def edit
@@ -25,6 +26,18 @@ class Public::GroupsController < ApplicationController
 
   def update
     @group = Group.find(params[:id])
+  end
+
+  def delete_member
+    @group = Group.find(params[:group_id])
+    @group.user_groups.delete(user.id)
+    redirect_to group_path(@group.id)
+  end
+
+  def destroy
+    @group = Group.find(params[:id])
+    @group.destroy
+    redirect_to user_path(current_user.id)
   end
 
   private

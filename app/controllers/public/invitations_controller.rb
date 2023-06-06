@@ -6,8 +6,14 @@ class Public::InvitationsController < ApplicationController
 
   def create
     @group = Group.find(params[:group_id])
-    @invitation = @group.invitations.new(invitation_params)
+    @invitation = @group.invitations.new(new_invitation_params)
     @invitation.save
+    redirect_to user_path(current_user.id)
+  end
+
+  def index
+    @group = Group.find(params[:group_id])
+    @invitations = @group.invitations.all
   end
 
   def edit
@@ -31,9 +37,21 @@ class Public::InvitationsController < ApplicationController
 
   def destroy
     @group = Group.find(params[:group_id])
-    @invitation = @group.invitations.find(params[:id])
-    @invitation.destroy
-    redirect_to user_path(current_user.id)
+    if @group.owner_id == current_user.id
+      @invitation = @group.invitations.find(params[:id])
+      @invitation.destroy
+      redirect_to group_path(@group.id)
+    else
+      @invitation = @group.invitations.find(params[:id])
+      @invitation.destroy
+      redirect_to user_path(current_user.id)
+    end
+  end
+
+  private
+
+  def new_invitation_params
+    params.require(:invitation).permit(:owner_id, :user_id, :group_id, :approved)
   end
 
   def invitation_params
