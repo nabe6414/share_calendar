@@ -8,6 +8,9 @@
     <% @users.each do |user| %>
       <% if @group.owner_id == current_user.id %>ID<%= user.id%><% end %><%= user.name %><br>
     <% end %>
+    <% unless @group.owner_id == current_user.id %>
+      <%= link_to "退会", group_delete_member_path(current_user.id), method: :delete, "data-confirm" => "本当にt退会しますか？", class: "btn btn-danger" %>
+    <% end %>
   </div>
   <% if @group.owner_id == current_user.id %>
   <h3 class="my-4"><span class="bg-light"><%= link_to new_group_invitation_path(@group.id) do %>グループに招待する<% end %></span></h>

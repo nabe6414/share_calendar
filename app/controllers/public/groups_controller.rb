@@ -30,8 +30,8 @@ class Public::GroupsController < ApplicationController
 
   def delete_member
     @group = Group.find(params[:group_id])
-    @group.user_groups.delete(user.id)
-    redirect_to group_path(@group.id)
+    @group.users.delete(current_user.id)
+    redirect_to user_path(current_user.id)
   end
 
   def destroy
