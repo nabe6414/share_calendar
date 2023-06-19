@@ -10,15 +10,16 @@ Rails.application.routes.draw do
   scope module: :public do
     root to: 'homes#top'
     resources :users
-    resources :groups do
-      resources :invitations
+    resources :groups, except: [:new] do
+      resources :invitations, except: [:show]
+      resources :plans
       delete 'delete_member'
     end
   end
   namespace :admin do
     get '/' => 'homes#top'
-    resources :users
-    resources :groups
+    resources :users, only: [:index, :show, :edit, :update, :destroy]
+    resources :groups, only: [:index, :show, :edit, :update, :destroy]
   end
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end

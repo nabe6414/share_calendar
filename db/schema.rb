@@ -42,6 +42,8 @@ ActiveRecord::Schema.define(version: 2023_05_23_122739) do
   end
 
   create_table "plans", force: :cascade do |t|
+    t.integer "user_id", null: false
+    t.integer "group_id", null: false
     t.string "title"
     t.date "start"
     t.date "end"

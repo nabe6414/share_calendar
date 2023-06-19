@@ -13,11 +13,18 @@ class Public::GroupsController < ApplicationController
     end
   end
 
+  def index
+    @group = Group.find(params[:id])
+    @plans = @group.plans.all
+  end
+
   def show
     @group = Group.find(params[:id])
     @users = @group.users.all
     @group_owner = User.find_by(id: @group.owner_id)
     @invitations = @group.invitations.all
+    @plans = @group.plans
+    @plan = @group.plans.new
   end
 
   def edit

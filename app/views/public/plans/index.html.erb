@@ -1,7 +1,10 @@
 <div class="container">
   <h2 class="my-4"><span class="bg-light"><%= @group.name %></span></h2>
   <p><%= @group.introduction %></p>
-  <div id='calendar'></div>
+
+  <div id="group_id" style="display:none"><%=@group.id%></div>
+  <div id="calendar"></div>
+
   <div>
     <%= form_with model: [@group, @plan], url: group_plans_path(@plan.group_id, @plan.id), method: :post do |f| %>
       <%= f.text_field :title, class: 'form-control'  %><br>
@@ -12,6 +15,12 @@
       <%= f.submit %>
     <% end %>
   </div>
+  <div>
+    <% @new_plans.each do |plan| %>
+      <%= plan.start %><%= plan.title %>
+    <% end %>
+  </div>
+
 
   <h3 class="my-4"><span class="bg-light">メンバー一覧（<%= @users.count + 1 %>人）</span></h3>
   <div class="col-12">

@@ -11,9 +11,32 @@ import "channels"
 import "jquery";
 import "popper.js";
 import "bootstrap";
-import "../stylesheets/application" 
+import "../stylesheets/application"
 import '@fortawesome/fontawesome-free/js/all'
 
 Rails.start()
 Turbolinks.start()
 ActiveStorage.start()
+
+import {Calendar} from '@fullcalendar/core';
+import interactionPlugin from "@fullcalendar/interaction";
+import dayGridPlugin from '@fullcalendar/daygrid';
+
+document.addEventListener('turbolinks:load', function () {
+    const calendarEl = document.getElementById('calendar');
+
+    var group_id = document.getElementById('group_id');
+    var url = '/groups/' + group_id.innerHTML;
+    url += '/plans.json';
+    console.log("url:" + url);
+    const calendar = new Calendar(calendarEl, {
+        plugins: [dayGridPlugin, interactionPlugin],
+        locale: 'ja',
+        timeZone: 'Asia/Tokyo',
+        selectable: true,
+        
+        events: url//'/groups/' + group_id + '/plans.json'
+    });
+
+    calendar.render();
+});
