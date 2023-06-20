@@ -1,16 +1,16 @@
 class Public::PlansController < ApplicationController
+  before_action :authenticate_user!
   def new
     @group = Group.find(params[:group_id])
     @plan = Plan.new
     @plan.group_id = @group.id
-    render plain: render_to_string(partial: 'form_new', layout: false, locals: { plan: @plan })
   end
 
   def create
     @group = Group.find(params[:group_id])
     @plan = @group.plans.new(plan_params)
     @plan.save
-    redirect_to group_path(@group.id)
+    redirect_to group_plans_path(@group.id)
   end
 
   def index
@@ -22,6 +22,13 @@ class Public::PlansController < ApplicationController
     @users = @group.users.all
     @invitations = @group.invitations.all
     @new_plans = @group.plans.order(created_at: :desc).limit(10)
+  end
+
+  def destroy
+    @group = Group.find(params[:group_id])
+    @plan = @group.plans.find(params[:id])
+    @plan.destroy
+    redirect_to group_plans_path(@group.id)
   end
 
   private

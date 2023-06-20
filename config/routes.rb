@@ -10,8 +10,8 @@ Rails.application.routes.draw do
   scope module: :public do
     root to: 'homes#top'
     resources :users
-    resources :groups, except: [:new] do
-      resources :invitations, except: [:show]
+    resources :groups, except: [:new, :show] do
+      resources :invitations, except: [:new, :show]
       resources :plans
       delete 'delete_member'
     end

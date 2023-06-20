@@ -1,4 +1,5 @@
 class Public::InvitationsController < ApplicationController
+  before_action :authenticate_user!
   def new
     @group = Group.find(params[:group_id])
     @invitation = @group.invitations.new
@@ -8,11 +9,12 @@ class Public::InvitationsController < ApplicationController
     @group = Group.find(params[:group_id])
     @invitation = @group.invitations.new(new_invitation_params)
     @invitation.save
-    redirect_to user_path(current_user.id)
+    redirect_to group_invitations_path(@group.id)
   end
 
   def index
     @group = Group.find(params[:group_id])
+    @invitation = @group.invitations.new
     @invitations = @group.invitations.all
   end
 
@@ -40,7 +42,7 @@ class Public::InvitationsController < ApplicationController
     if @group.owner_id == current_user.id
       @invitation = @group.invitations.find(params[:id])
       @invitation.destroy
-      redirect_to group_path(@group.id)
+      redirect_to group_invitations_path(@group.id)
     else
       @invitation = @group.invitations.find(params[:id])
       @invitation.destroy

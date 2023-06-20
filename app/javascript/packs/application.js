@@ -34,7 +34,7 @@ document.addEventListener('turbolinks:load', function () {
         locale: 'ja',
         timeZone: 'Asia/Tokyo',
         selectable: true,
-        
+
         events: url//'/groups/' + group_id + '/plans.json'
     });
 

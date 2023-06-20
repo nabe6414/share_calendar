@@ -1,9 +1,11 @@
 class Public::GroupsController < ApplicationController
+  before_action :authenticate_user!
   def create
     @group = Group.new(group_params)
     @group.owner_id = current_user.id
+    @group.users << current_user
     if @group.save
-      redirect_to group_path(@group.id)
+      redirect_to group_plans_path(@group.id)
     else
       @user = current_user
       @invitations = current_user.invitations.all
@@ -33,6 +35,8 @@ class Public::GroupsController < ApplicationController
 
   def update
     @group = Group.find(params[:id])
+    @group.update(group_params)
+    redirect_to group_plans_path(@group.id)
   end
 
   def delete_member
