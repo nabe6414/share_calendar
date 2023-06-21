@@ -1,36 +1,39 @@
 <div class="container">
   <h2 class="my-4"><span class="bg-light">マイページ編集</span></h2>
-
-  <div class="row">
-    <div class="col-12 my-2">
-      <strong>登録情報</strong></td>
+  <% if @user.email == 'guest@example.com'%>
+    <p>ゲストユーザーはユーザー情報の編集ができません。</p>
+  <% else %>
+    <div class="row">
+      <div class="col-12 my-2">
+        <strong>登録情報</strong></td>
+      </div>
+      <%= form_with model: @user, url: user_path(@user.id), method: :patch do |f| %>
+      <div class="col-12">
+        <table>
+          <thead>
+            <tr>
+              <th class="col-4"></th>
+              <th class="col-8"></th>
+            </tr>
+          </thead>
+          <tbody class="table">
+            <tr>
+              <td class="bg-light">ID</td>
+              <td><%= @user.id %></td>
+            </tr>
+            <tr>
+              <td class="bg-light">氏名</td>
+              <td><%= f.text_field :name %></td>
+            </tr>
+            <tr>
+              <td class="bg-light">メールアドレス</td>
+              <td><%= f.email_field :email %></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <%= f.submit "更新する" %>
+      <% end %>
     </div>
-    <%= form_with model: @user, url: user_path(@user.id), method: :patch do |f| %>
-    <div class="col-12">
-      <table>
-        <thead>
-          <tr>
-            <th class="col-4"></th>
-            <th class="col-8"></th>
-          </tr>
-        </thead>
-        <tbody class="table">
-          <tr>
-            <td class="bg-light">ID</td>
-            <td><%= @user.id %></td>
-          </tr>
-          <tr>
-            <td class="bg-light">氏名</td>
-            <td><%= f.text_field :name %></td>
-          </tr>
-          <tr>
-            <td class="bg-light">メールアドレス</td>
-            <td><%= f.email_field :email %></td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-    <%= f.submit "更新する" %>
-    <% end %>
-  </div>
+  <% end %>
 </div>

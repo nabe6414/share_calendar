@@ -16,8 +16,7 @@ class Public::GroupsController < ApplicationController
   end
 
   def index
-    @group = Group.find(params[:id])
-    @plans = @group.plans.all
+    @groups = current_user.belong_groups.all
   end
 
   def show

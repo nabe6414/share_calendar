@@ -21,11 +21,11 @@
             <td><%= @user.id %></td>
           </tr>
           <tr>
-            <td class="bg-light">氏名</td>
+            <td class="bg-light">Name</td>
             <td><%= @user.name %></td>
           </tr>
           <tr>
-            <td class="bg-light">メールアドレス</td>
+            <td class="bg-light">email</td>
             <td><%= @user.email %></td>
           </tr>
         </tbody>
@@ -67,6 +67,46 @@
         <%= f.submit "新規作成", class: "btn btn-success" %>
       <% end %>
     </div>
+    
+    <% if @user.email == 'guest@example.com'%>
+    <h4 class="col-12 my-3">テストユーザー</h4>
+    <p class="col-12">確認のためにご利用ください</p>
+    <table class="table">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Name</th>
+          <th>email</th>
+          <th>password</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>1</td>
+          <td>テスト</td>
+          <td>test@test</td>
+          <td>123456</td>
+        </tr>
+        <tr>
+          <td>2</td>
+          <td>テスト2</td>
+          <td>test2@test</td>
+          <td>123456</td>
+        </tr>
+        <tr>
+          <td>3</td>
+          <td>てすと3</td>
+          <td>test3@test</td>
+          <td>123456</td>
+        </tr>
+        <tr>
+          <td>4</td>
+          <td>test4</td>
+          <td>test4@test</td>
+          <td>123456</td>
+        </tr>
+      </tbody>
+    </table>
+    <% end %>
   </div>
 </div>
-<%= form_authenticity_token %>

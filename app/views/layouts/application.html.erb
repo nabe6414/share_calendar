@@ -27,7 +27,7 @@
                   <i class="fas fa-home"></i> MyPage
                 <% end %>
               <li class="nav-item">
-                Groups
+                <%= link_to groups_path, class: 'nav-link text-white' do %>Groups<% end %>
               </li>
               <li class="nav-item">
                 <%= link_to destroy_user_session_path, method: :delete, class: 'nav-link text-white' do %>
