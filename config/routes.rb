@@ -6,7 +6,7 @@ Rails.application.routes.draw do
   devise_for :admin, skip: [:registrations, :passwords] ,controllers: {
   sessions: "admin/sessions"
   }
-  
+
   devise_scope :user do
     post 'public/guest_sign_in', to: 'public/sessions#guest_sign_in'
   end
@@ -23,7 +23,7 @@ Rails.application.routes.draw do
   namespace :admin do
     get '/' => 'homes#top'
     resources :users, only: [:index, :show, :edit, :update, :destroy]
-    resources :groups, only: [:index, :show, :edit, :update, :destroy]
+    resources :groups, only: [:show, :destroy]
   end
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end

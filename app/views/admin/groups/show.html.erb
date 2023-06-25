@@ -1,2 +1,36 @@
-<h1>Admin::Groups#show</h1>
-<p>Find me in app/views/admin/groups/show.html.erb</p>
+<div class="container">
+  <h2 class="my-4">
+    <strong><%= @group.name %></strong>
+  </h2>
+  <p><%= @group.introduction %></p>
+  <p><span class="mr-3">Owner</span><%= @group_owner.name %></p>
+
+  <div class="row my-4">
+    <div class="col-6">
+      <h2>スケジュール</h2>
+      <% @new_plans.each do |plan| %>
+        <%= plan.start %><%= plan.title %><br>
+      <% end %>
+    </div>
+  </div>
+
+  <h2 class="my-4">メンバー一覧（<%= @users.count %>人）</h2>
+  <div class="col-12">
+    <% @users.each do |user| %>
+      <span class="mr-2">ID<%= user.id %></span>
+      <%= user.name %><br>
+    <% end %>
+  </div>
+
+  <% if @invitations.count == 0 %>
+    <% else %>
+    <h3 class="my-4"><span class="bg-light">招待中</span></h3>
+    <% @invitations.each do |invitation| %>
+    <%= invitation.user.name %>
+      <%= link_to "取消", group_invitation_path(invitation.group_id, invitation.id), method: :delete %><br>
+    <% end %>
+  <% end %>
+  <h3 class="my-4">
+    <%= link_to "グループ削除", admin_group_path(@group.id), method: :delete, "data-confirm" => "本当に削除しますか？", class: "btn btn-danger" %>
+  </h3>
+</div>

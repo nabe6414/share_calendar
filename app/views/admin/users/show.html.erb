@@ -1,2 +1,55 @@
-<h1>Admin::Users#show</h1>
-<p>Find me in app/views/admin/users/show.html.erb</p>
+<div class="container">
+  <h2 class="my-4"><span class="bg-light">マイページ</span></h2>
+
+  <div class="row">
+    <div class="col-12 my-2">
+      <strong>登録情報</strong></td>
+      <%= link_to "編集する", edit_admin_user_path(@user.id), class: "btn btn-success ml-4" %>
+    </div>
+
+    <div class="col-12">
+      <table>
+        <thead>
+          <tr>
+            <th class="col-4"></th>
+            <th class="col-8"></th>
+          </tr>
+        </thead>
+        <tbody class="table">
+          <tr>
+            <td class="bg-light">ID</td>
+            <td><%= @user.id %></td>
+          </tr>
+          <tr>
+            <td class="bg-light">Name</td>
+            <td><%= @user.name %></td>
+          </tr>
+          <tr>
+            <td class="bg-light">email</td>
+            <td><%= @user.email %></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <% if @invitations.count == 0 %>
+    <% else %>
+    <h3 class="my-4 col-12"><span class="bg-light">招待されているグループ</span></h3>
+    <div class="col-12">
+      <% @invitations.each do |invitation| %>
+        <%= link_to edit_group_invitation_path(invitation.group_id, invitation.id) do %><%= invitation.group.name %><% end %><br>
+      <% end %>
+    </div>
+    <% end %>
+
+    <% if @groups.count == 0 %>
+    <% else %>
+    <h3 class="my-4 col-12"><span class="bg-light">参加グループ</span></h3>
+    <div class="col-12">
+      <% @groups.each do |group| %>
+        <%= link_to group_plans_path(group.id) do %><%= group.name %><% end %><br>
+      <% end %>
+    </div>
+    <% end %>
+  </div>
+</div>
