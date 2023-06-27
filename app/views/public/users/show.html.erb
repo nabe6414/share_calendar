@@ -2,19 +2,12 @@
   <h2 class="my-4"><span class="bg-light">マイページ</span></h2>
 
   <div class="row">
-    <div class="col-12 my-2">
+    <div class="col-6 my-2">
       <strong>登録情報</strong></td>
-      <%= link_to "編集する", edit_user_path(@user.id), class: "btn btn-success ml-4" %>
-    </div>
-
-    <div class="col-12">
+      <%= link_to edit_user_path(@user.id) do %>
+        <i class="fas fa-user-edit"></i>
+      <% end %>
       <table>
-        <thead>
-          <tr>
-            <th class="col-4"></th>
-            <th class="col-8"></th>
-          </tr>
-        </thead>
         <tbody class="table">
           <tr>
             <td class="bg-light">ID</td>
@@ -32,6 +25,16 @@
       </table>
     </div>
 
+    <div class="col-6">
+      <% if @groups.count == 0 %>
+      <% else %>
+      <h3 class="my-4"><span class="bg-light">参加グループ</span></h3>
+        <% @groups.each do |group| %>
+          <%= link_to group_plans_path(group.id) do %><%= group.name %><% end %><br>
+        <% end %>
+      <% end %>
+    </div>
+
     <% if @invitations.count == 0 %>
     <% else %>
     <h3 class="my-4 col-12"><span class="bg-light">招待されているグループ</span></h3>
@@ -42,18 +45,8 @@
     </div>
     <% end %>
 
-    <% if @groups.count == 0 %>
-    <% else %>
-    <h3 class="my-4 col-12"><span class="bg-light">参加グループ</span></h3>
-    <div class="col-12">
-      <% @groups.each do |group| %>
-        <%= link_to group_plans_path(group.id) do %><%= group.name %><% end %><br>
-      <% end %>
-    </div>
-    <% end %>
-
     <h3 class="my-4 col-12"><span class="bg-light">グループ新規作成</span></h3>
-    <div class="col-12">
+    <div class="col-6">
       <%= form_with model: @group, url: groups_path(@group.id), method: :post do |f| %>
         <div class="field">
           <%= f.label :name %><br>
@@ -67,46 +60,5 @@
         <%= f.submit "新規作成", class: "btn btn-success" %>
       <% end %>
     </div>
-    
-    <% if @user.email == 'guest@example.com'%>
-    <h4 class="col-12 my-3">テストユーザー</h4>
-    <p class="col-12">確認のためにご利用ください</p>
-    <table class="table">
-      <thead>
-        <tr>
-          <th>ID</th>
-          <th>Name</th>
-          <th>email</th>
-          <th>password</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td>1</td>
-          <td>テスト</td>
-          <td>test@test</td>
-          <td>123456</td>
-        </tr>
-        <tr>
-          <td>2</td>
-          <td>テスト2</td>
-          <td>test2@test</td>
-          <td>123456</td>
-        </tr>
-        <tr>
-          <td>3</td>
-          <td>てすと3</td>
-          <td>test3@test</td>
-          <td>123456</td>
-        </tr>
-        <tr>
-          <td>4</td>
-          <td>test4</td>
-          <td>test4@test</td>
-          <td>123456</td>
-        </tr>
-      </tbody>
-    </table>
-    <% end %>
   </div>
 </div>

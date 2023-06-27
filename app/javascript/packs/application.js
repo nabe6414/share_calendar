@@ -21,6 +21,7 @@ ActiveStorage.start()
 import {Calendar} from '@fullcalendar/core';
 import interactionPlugin from "@fullcalendar/interaction";
 import dayGridPlugin from '@fullcalendar/daygrid';
+import timeGridPlugin from '@fullcalendar/timegrid';
 
 document.addEventListener('turbolinks:load', function () {
     const calendarEl = document.getElementById('calendar');
@@ -30,7 +31,7 @@ document.addEventListener('turbolinks:load', function () {
     url += '/plans.json';
     console.log("url:" + url);
     const calendar = new Calendar(calendarEl, {
-        plugins: [dayGridPlugin, interactionPlugin],
+        plugins: [dayGridPlugin, timeGridPlugin, interactionPlugin],
         locale: 'ja',
         timeZone: 'Asia/Tokyo',
         selectable: true,

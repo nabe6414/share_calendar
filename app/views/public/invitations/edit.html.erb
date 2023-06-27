@@ -1,5 +1,5 @@
 <div class="container">
-  <h2><%= @group.name%>へ招待されました</h2>
+  <h2 class="my-4"><%= @group.name%>へ招待されました</h2>
   <%= form_with model: [@group, @invitation], url: group_invitation_path(@invitation.group_id, @invitation.id), method: :patch do |f| %>
     <% f.hidden_field :approved, :value => true %>
     <%= f.submit "参加", class: "btn btn-success" %>

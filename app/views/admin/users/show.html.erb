@@ -17,15 +17,15 @@
         </thead>
         <tbody class="table">
           <tr>
-            <td class="bg-light">ID</td>
+            <td>ID</td>
             <td><%= @user.id %></td>
           </tr>
           <tr>
-            <td class="bg-light">Name</td>
+            <td>Name</td>
             <td><%= @user.name %></td>
           </tr>
           <tr>
-            <td class="bg-light">email</td>
+            <td>email</td>
             <td><%= @user.email %></td>
           </tr>
         </tbody>
@@ -47,7 +47,7 @@
     <h3 class="my-4 col-12"><span class="bg-light">参加グループ</span></h3>
     <div class="col-12">
       <% @groups.each do |group| %>
-        <%= link_to group_plans_path(group.id) do %><%= group.name %><% end %><br>
+        <%= link_to admin_group_path(group.id) do %><%= group.name %><% end %><br>
       <% end %>
     </div>
     <% end %>

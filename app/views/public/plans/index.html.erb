@@ -1,59 +1,58 @@
 <div class="container">
-  <h2 class="my-4">
-    <strong><%= @group.name %></strong>
-    <% if @group.owner_id == current_user.id %>
-      <%= link_to "編集", edit_group_path(@group.id), class: "btn btn-success" %>
-    <% end %>
-  </h2>
-  <p><%= @group.introduction %></p>
-  <p><span class="mr-3">Owner</span><%= @group_owner.name %></p>
-
-
-  <div id="group_id" style="display:none"><%=@group.id%></div>
-  <div id="calendar"></div>
-
   <div class="row my-4">
-    <div class="col-6">
+    <h2 class="my-4 col-10">
+      <strong><%= @group.name %></strong>
+    </h2>
+    <% if @group.owner_id == current_user.id %>
+      <h2 class="my-4 col-2">
+        <%= link_to group_invitations_path(@group.id) do %>
+          <i class="fas fa-user-plus"></i>
+        <% end %>
+        <%= link_to edit_group_path(@group.id) do %>
+          <i class="fas fa-edit"></i>
+        <% end %>
+        <%= link_to group_path(@group.id), method: :delete, "data-confirm" => "本当にグループを削除しますか？" do %>
+          <i class="fas fa-trash-alt" style="color: #FF0000;"></i>
+        <% end %>
+      </h2>
+    <% else %>
+      <%= link_to "leave", group_delete_member_path(current_user.id), method: :delete, "data-confirm" => "グループから離脱しますか？", class: "btn btn-danger mt-5" %>
+    <% end %>
+
+    <div class="col-9">
+      <p><%= @group.introduction %></p>
+      <p><span class="mr-3">Owner</span><%= @group_owner.name %></p>
+
+      <div id="group_id" style="display:none"><%=@group.id%></div>
+      <div id="calendar"></div>
+    </div>
+
+    <div class="col-3">
       <h2>New Plan</h2>
       <%= form_with model: [@group, @plan], url: group_plans_path(@plan.group_id, @plan.id), method: :post do |f| %>
         <%= f.text_field :title, class: 'form-control' %><br>
-        <%= f.datetime_select :start, {}, class: "form-control", style: 'display: inline-block;width: auto;' %><br>
-        <%= f.datetime_select :end, {}, class: "form-control", style: 'display: inline-block;width: auto;' %><br>
+        <%= f.label :start, class: 'control-label' %><br>
+        <%= f.date_select :start, {use_month_numbers: true}, class: "form-control", style: 'display: inline-block;width: auto;' %><br>
+        <%= f.label :end, class: 'control-label' %><br>
+        <%= f.date_select :end, {use_month_numbers: true}, class: "form-control", style: 'display: inline-block;width: auto;' %><br>
         <%= f.hidden_field :group_id, :value => @group.id %>
         <%= f.hidden_field :user_id, :value => current_user.id %>
-        <%= f.submit class: "btn btn-success" %>
+        <%= f.submit class: "btn btn-success my-3" %>
       <% end %>
-    </div>
-    <div class="col-6">
-      <h2>最近追加された予定</h2>
+      <h4 class="mt-5">イベント追加履歴</h4>
       <% @new_plans.each do |plan| %>
-        <%= plan.start %><%= plan.title %><%= link_to "削除", group_plan_path(@group.id, plan.id), method: :delete, "data-confirm" => "本当に削除しますか？" %><br>
+        <%= plan.start %>～<%= plan.title %><%= link_to "削除", group_plan_path(@group.id, plan.id), method: :delete, "data-confirm" => "本当に削除しますか？" %><br>
+      <% end %>
+    </div>
+
+    <h2 class="my-4">メンバー一覧（<%= @users.count %>人）</h2>
+    <div class="col-12">
+      <% @users.each do |user| %>
+        <% if @group.owner_id == current_user.id %>
+          <span class="mr-2">ID<%= user.id %></span>
+        <% end %>
+        <%= user.name %><br>
       <% end %>
     </div>
   </div>
-
-  <h2 class="my-4">メンバー一覧（<%= @users.count %>人）</h2>
-  <div class="col-12">
-    <% @users.each do |user| %>
-      <% if @group.owner_id == current_user.id %>
-        <span class="mr-2">ID<%= user.id %></span>
-      <% end %>
-      <%= user.name %><br>
-    <% end %>
-    <% unless @group.owner_id == current_user.id %>
-      <%= link_to "退会", group_delete_member_path(current_user.id), method: :delete, "data-confirm" => "本当に退会しますか？", class: "btn btn-danger" %>
-    <% end %>
-  </div>
-
-  <% if @invitations.count == 0 %>
-    <% else %>
-    <h3 class="my-4"><%= link_to group_invitations_path(@group.id) do %><span class="bg-light">招待中</span><% end %></h>
-  <% end %>
-
-  <% if @group.owner_id == current_user.id %>
-    <h3 class="my-4">
-      <%= link_to "招待", group_invitations_path(@group.id), class: "btn btn-success" %>
-      <%= link_to "グループ削除", group_path(@group.id), method: :delete, "data-confirm" => "本当に削除しますか？", class: "btn btn-danger" %>
-    </h3>
-  <% end %>
 </div>

@@ -15,6 +15,9 @@
       <nav class="navbar navbar-expand-lg navbar-dark position-relative">
         <div class="container">
           <a class="navbar-brand" href="/"><span><i class="fas fa-calendar-alt mr-1"></i>ShareCalendar</span></a>
+          <% if user_signed_in? %>
+            <p class="text-white ml-5 mt-2 pl-5">ようこそ、<%= current_user.name %>さん！</p>
+          <% end %>
           <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#menu" aria-controls="menu" aria-expanded="false" aria-label="Toggle-navigation">
             <span class="navbar-toggler-icon"></span>
           </button>
