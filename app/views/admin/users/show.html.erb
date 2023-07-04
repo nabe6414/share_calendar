@@ -47,7 +47,7 @@
     <h3 class="my-4 col-12"><span class="bg-light">参加グループ</span></h3>
     <div class="col-12">
       <% @groups.each do |group| %>
-        <%= link_to admin_group_path(group.id) do %><%= group.name %><% end %><br>
+        <%= link_to admin_group_plans_path(group.id) do %><%= group.name %><% end %><br>
       <% end %>
     </div>
     <% end %>
