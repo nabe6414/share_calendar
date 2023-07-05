@@ -1,6 +1,6 @@
 <div class="container">
   <% if @group.owner_id == current_user.id %>
-    <h2>グループへ招待</h2>
+    <h2 class="my-4">グループへ招待</h2>
 
     <div class="row">
       <%= form_with model: [@group, @invitation], url: group_invitations_path(@group.id, @invitation.id), method: :post do |f| %>
@@ -8,7 +8,7 @@
         <%= f.number_field :user_id %>
         <%= f.hidden_field :owner_id, :value => current_user.id %>
         <%= f.hidden_field :group_id, :value => @group.id %>
-        <%= f.submit "招待する", class: "btn btn-success mb-3" %>
+        <%= f.submit "招待", class: "btn btn-success mb-3" %>
       <% end %>
     </div>
   <% end %>

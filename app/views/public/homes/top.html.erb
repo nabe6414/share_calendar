@@ -1,5 +1,7 @@
 <div class="container">
   <h1 class="my-4">ShareCalendar</h1>
   <P>家族や友人とイベントを共有しよう！</p>
-  <%= link_to 'ゲストログイン（閲覧用）', public_guest_sign_in_path, method: :post %>
+  <% unless user_signed_in? %>
+    <%= link_to 'ゲストログイン（閲覧用）', public_guest_sign_in_path, method: :post %>
+  <% end %>
 </div>

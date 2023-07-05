@@ -1,4 +1,5 @@
 <div class="container">
+  <% if @users.include?(current_user) %>
   <div class="row my-4">
     <h2 class="my-4 col-10">
       <strong><%= @group.name %></strong>
@@ -18,16 +19,12 @@
     <% else %>
       <%= link_to "leave", group_delete_member_path(current_user.id), method: :delete, "data-confirm" => "グループから離脱しますか？", class: "btn btn-danger mt-5" %>
     <% end %>
-
-    <div class="col-9">
+    <div class="col-12">
       <p><%= @group.introduction %></p>
       <p><span class="mr-3">Owner</span><%= @group_owner.name %></p>
-
-      <div id="group_id" style="display:none"><%=@group.id%></div>
-      <div id="calendar"></div>
     </div>
 
-    <div class="col-3">
+    <div class="col-md-3 col-sm-12 my-3">
       <h2>New Plan</h2>
       <%= form_with model: [@group, @plan], url: group_plans_path(@plan.group_id, @plan.id), method: :post do |f| %>
         <%= f.text_field :title, class: 'form-control' %><br>
@@ -39,20 +36,34 @@
         <%= f.hidden_field :user_id, :value => current_user.id %>
         <%= f.submit class: "btn btn-success my-3" %>
       <% end %>
-      <h4 class="mt-5">イベント追加履歴</h4>
+      <h4 class="mt-4">イベント追加履歴</h4>
       <% @new_plans.each do |plan| %>
         <%= plan.start %>～<%= plan.title %><%= link_to "削除", group_plan_path(@group.id, plan.id), method: :delete, "data-confirm" => "本当に削除しますか？" %><br>
       <% end %>
     </div>
 
-    <h2 class="my-4">メンバー一覧（<%= @users.count %>人）</h2>
-    <div class="col-12">
+    <div class="col-md-7 col-sm-12">
+      <div id="group_id" style="display:none"><%=@group.id%></div>
+      <div id="calendar"></div>
+    </div>
+
+    <div class="col-md-2 col-sm-12">
+      <h6 class="my-4">メンバー（<%= @users.count %>人）</h6>
       <% @users.each do |user| %>
-        <% if @group.owner_id == current_user.id %>
-          <span class="mr-2">ID<%= user.id %></span>
-        <% end %>
-        <%= user.name %><br>
+      <ul>
+        <li>
+          <% if @group.owner_id == current_user.id %>
+            <span class="mr-2">ID<%= user.id %></span>
+          <% end %>
+          <%= user.name %>
+        </li>
+      </ul>
       <% end %>
     </div>
   </div>
+  <% else %>
+  <div class="row my-4">
+    <h2>閲覧権限がありません</h2>
+  </div>
+  <% end %>
 </div>

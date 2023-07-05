@@ -4,6 +4,7 @@
     <% f.hidden_field :approved, :value => true %>
     <%= f.submit "参加", class: "btn btn-success" %>
   <% end %>
-  <%= link_to "拒否", group_invitation_path(@invitation.group_id, @invitation.id), method: :delete, "data-confirm" => "グループへの参加を断りますか？", class: "btn btn-danger" %>
+  <%= link_to "拒否", group_invitation_path(@invitation.group_id, @invitation.id), method: :delete, "data-confirm" => "グループへの参加を断りますか？", class: "btn btn-danger my-2" %><br>
+  <%= link_to "back", user_path(current_user.id) %>
 
 </div>

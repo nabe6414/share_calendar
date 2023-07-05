@@ -13,5 +13,6 @@
       <%= f.hidden_field :owner_id, :value => current_user.id %>
       <%= f.submit "更新", class: "btn btn-success" %>
     <% end %>
+    <%= link_to "back", group_plans_path(@group.id) %>
   </div>
 </div>

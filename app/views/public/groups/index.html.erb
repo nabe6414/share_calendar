@@ -1,8 +1,8 @@
 <div class="container">
   <% if @groups.count == 0 %>
-    <h2 class="my-4">新しいグループを作成してみよう！</h2>
+    <h2 class="my-4">現在参加グルプがありません</h2>
   <% else %>
-    <h2 class="my-4"><span class="bg-light">グループ一覧</span></h2>
+    <h2 class="my-4">参加グループ</h2>
     <% @groups.each do |group| %>
       <%= link_to group_plans_path(group.id) do %><%= group.name %><% end %><br>
     <% end %>
