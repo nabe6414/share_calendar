@@ -1,24 +1,28 @@
-# README
+# share_calendar
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## サイト概要
+### サイトテーマ
+家族や友人とスケジュールを共有できるサイト
 
-Things you may want to cover:
+### テーマを選んだ理由
+休みの予定を共有することで、旅行や遊びの予定がたてやすくなると感じたからです。
+また家族などで利用することで、買い物など他の予定を作りやすくなると思います。
 
-* Ruby version
+### ターゲットユーザ
+- 変形労働制で休みが不定期な人
+- 旅行などの日程を具体的にたてたい人
+- みんなでイベントを共有したい人
 
-* System dependencies
+### 主な利用シーン
+- 休みがみんなと合わず、旅行など遊びの予定をたてる際に毎回休日の連絡をするのが億劫になってしまう時
+- 家族の仕事や学校の休みを把握し、お弁当の有無を判断したい時
 
-* Configuration
+## 設計書
+<...>
 
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+## 開発環境
+- OS：Linux(CentOS)
+- 言語：HTML,CSS,JavaScript,Ruby,SQL
+- フレームワーク：Ruby on Rails
+- JSライブラリ：jQuery
+- IDE：Cloud9
