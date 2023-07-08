@@ -1,6 +1,7 @@
 <div class="container">
   <% if @group.owner_id == current_user.id %>
     <h2 class="my-4">グループへ招待</h2>
+    <p>招待したいユーザーのIDを入力してください</p>
 
     <div class="row">
       <%= form_with model: [@group, @invitation], url: group_invitations_path(@group.id, @invitation.id), method: :post do |f| %>
