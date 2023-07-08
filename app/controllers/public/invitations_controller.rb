@@ -39,12 +39,12 @@ class Public::InvitationsController < ApplicationController
 
   def destroy
     @group = Group.find(params[:group_id])
-    if @group.owner_id == current_user.id
+    if @group.owner_id == current_user.id # オーナーが招待を取り消すとき
       @invitation = @group.invitations.find(params[:id])
       @invitation.destroy
       redirect_to group_invitations_path(@group.id)
     else
-      @invitation = @group.invitations.find(params[:id])
+      @invitation = @group.invitations.find(params[:id]) # 招待されたユーザが参加を断る時
       @invitation.destroy
       redirect_to user_path(current_user.id)
     end

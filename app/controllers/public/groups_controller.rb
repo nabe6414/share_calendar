@@ -34,8 +34,12 @@ class Public::GroupsController < ApplicationController
 
   def update
     @group = Group.find(params[:id])
-    @group.update(group_params)
-    redirect_to group_plans_path(@group.id)
+    if @group.update(group_params)
+      flash[:update_group] = "グループ情報が更新されました"
+      redirect_to group_plans_path(@group.id)
+    else
+      render edit
+    end
   end
 
   def delete_member

@@ -10,5 +10,6 @@ class Admin::GroupsController < ApplicationController
   def destroy
     @group = Group.find(params[:id])
     @group.destroy
+    redirect_to admin_path
   end
 end

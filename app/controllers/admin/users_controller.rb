@@ -17,9 +17,19 @@ class Admin::UsersController < ApplicationController
   def update
     @user = User.find(params[:id])
     if @user.update(user_params)
+      flash[:update_user] = "ユーザー情報が更新されました"
       redirect_to admin_user_path(@user.id)
     else
       render :edit
+    end
+  end
+  
+  def destroy
+    @user = User.find(params[:id])
+    if @user.destroy
+      redirect_to admin_users_path
+    else
+      render :show
     end
   end
 
