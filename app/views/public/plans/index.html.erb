@@ -5,11 +5,11 @@
 <div class="container">
   <% if @users.include?(current_user) %>
   <div class="row my-4">
-    <h2 class="my-4 col-10">
+    <h2 class="my-4 col-md-10 col-sm-6">
       <strong><%= @group.name %></strong>
     </h2>
     <% if @group.owner_id == current_user.id %>
-      <h2 class="my-4 col-2">
+      <h2 class="my-4 col-md-2 col-sm-6">
         <%= link_to group_invitations_path(@group.id) do %>
           <i class="fas fa-user-plus"></i>
         <% end %>
