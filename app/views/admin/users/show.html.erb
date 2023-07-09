@@ -2,7 +2,7 @@
   <h3 class="text-success"><%= flash[:update_customer] %></h3>
 </div>
 <div class="container">
-  <h2 class="my-4"><span class="bg-light">ユーザーページ</span></h2>
+  <h2 class="my-4">ユーザーページ</h2>
 
   <div class="row">
     <div class="col-12 my-2">
@@ -37,17 +37,17 @@
 
     <% if @invitations.count == 0 %>
     <% else %>
-    <h3 class="my-4 col-12"><span class="bg-light">招待されているグループ</span></h3>
+    <h3 class="my-4 col-12">招待されているグループ</h3>
     <div class="col-12">
       <% @invitations.each do |invitation| %>
-        <%= link_to edit_group_invitation_path(invitation.group_id, invitation.id) do %><%= invitation.group.name %><% end %><br>
+        <%= link_to admin_group_path(invitation.group_id) do %><%= invitation.group.name %><% end %><br>
       <% end %>
     </div>
     <% end %>
 
     <% if @groups.count == 0 %>
     <% else %>
-    <h3 class="my-4 col-12"><span class="bg-light">参加グループ</span></h3>
+    <h3 class="my-4 col-12">参加グループ</h3>
     <div class="col-12">
       <% @groups.each do |group| %>
         <%= link_to admin_group_path(group.id) do %><%= group.name %><% end %><br>

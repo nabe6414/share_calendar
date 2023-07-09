@@ -24,7 +24,7 @@
 
   <% if @invitations.count == 0 %>
     <% else %>
-    <h3 class="my-4"><span class="bg-light">招待中</span></h3>
+    <h3 class="my-4">招待中</h3>
     <% @invitations.each do |invitation| %>
     <%= invitation.user.name %>
       <%= link_to "取消", group_invitation_path(invitation.group_id, invitation.id), method: :delete %><br>
