@@ -21,7 +21,7 @@
         <% end %>
       </h2>
     <% else %>
-      <%= link_to "leave", group_delete_member_path(current_user.id), method: :delete, "data-confirm" => "グループから離脱しますか？", class: "btn btn-danger mt-5" %>
+      <%= link_to "leave", group_delete_member_path(@group.id), method: :delete, "data-confirm" => "グループから離脱しますか？", class: "btn btn-danger mt-5" %>
     <% end %>
     <div class="col-12">
       <p><%= @group.introduction %></p>
